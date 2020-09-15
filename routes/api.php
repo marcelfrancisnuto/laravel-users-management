@@ -17,3 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/**
+ * API routes for Users Management
+ */
+
+ //list all users
+Route::get('/users', 'UserController@index');
+
+//view user details
+Route::get('/users/{id}', 'UserController@view');
+
+Route::delete('/users/{id}', 'UserController@delete');
+
+Route::fallback(function () {
+return response()->json([
+        'message' => 'The requested resource was not found.'
+    ], 404);
+});
