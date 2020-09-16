@@ -28,7 +28,11 @@ Route::get('/users', 'UserController@index');
 //view user details
 Route::get('/users/{id}', 'UserController@view');
 
+//delete a user
 Route::delete('/users/{id}', 'UserController@delete');
+
+//create new user
+Route::post('/users', 'UserController@create');
 
 Route::fallback(function () {
 return response()->json([
