@@ -19,6 +19,8 @@ DB_PASSWORD=yourddbpassword
 $ composer install
 ```
 
+Run `composer update` if there are errors during composer install
+
 **Install NPM depdencies**
 
 ```
