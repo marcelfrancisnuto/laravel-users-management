@@ -22,10 +22,15 @@ class UserResource extends JsonResource
         Log::debug(DB::getQueryLog());
 
         return [
+            'id' => $this->id,
             'username' => $this->username,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'email' => $this->email
+            'address' => $this->address,
+            'postal_code' => $this->postal_code,
+            'phone_number' => $this->phone_number,
+            'email' => $this->email,
+            'username' => $this->username
         ];
     }
 }

@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 use App\Models\User;
 use App\Models\Role;
+
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -26,10 +29,12 @@ class UserController extends Controller
             $user->phone_number = $request->input('phone_number');
             $user->email = $request->input('email');
             $user->username = $request->input('username');
+            $user->role = "Standard";
+            $user->email_verified_at = Carbon::now();
             $user->password = Hash::make($request->input('password'));
 
             if ($user->save()) {
-                return response()->json(["message" => $user]);
+                return response()->json(["data" => new UserResource($user), "success" => true]);
             } else {
                 return response()->json(["errors" => "An error has occurred"]);
             }
@@ -45,16 +50,22 @@ class UserController extends Controller
     }
 
     public function delete($id) {
-        $user = User::findOrFail($id);
+        try {
+           $ids = explode(',', $id);
 
-        if ($user) {
-            if ($user->delete()) {
-                return response()->json(["message" => "User has been deleted"], 200);
+        foreach($ids as $i) {
+            Log::debug($i);
+            $user = User::findOrFail($i);
+
+            if ($user) {
+                $user->delete();
             }
-        } else {
-            return response()->json(["error" => "The requested resource was not found"]);
         }
+        
+        return response()->json(["message" => "User/s deleted", "success" => true], 200);
 
-        return response()->json(null);
+        } catch (Exception $e) {
+            return response()->json(["error" => "An error has occurred", "errors" => $e]);
+        }
     }
 }
