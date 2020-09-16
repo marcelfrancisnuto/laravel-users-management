@@ -34,6 +34,8 @@ Route::delete('/users/{id}', 'UserController@delete');
 //create new user
 Route::post('/users', 'UserController@create');
 
+Route::put('/users/{id}', 'UserController@update');
+
 Route::get('/secrets', 'SecretController@index');
 
 // Route::fallback(function () {
