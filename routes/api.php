@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -34,8 +34,10 @@ Route::delete('/users/{id}', 'UserController@delete');
 //create new user
 Route::post('/users', 'UserController@create');
 
-Route::fallback(function () {
-return response()->json([
-        'message' => 'The requested resource was not found.'
-    ], 404);
-});
+Route::get('/secrets', 'SecretController@index');
+
+// Route::fallback(function () {
+// return response()->json([
+//         'message' => 'The requested resource was not found.'
+//     ], 404);
+// });

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
+use App\Models\Secret;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,5 +24,8 @@ class DatabaseSeeder extends Seeder
 
         //create dummy accounts to populate the list in vue
         User::factory(15)->create();
+
+        //create dummy secrets
+        Secret::factory(10)->create();
     }
 }

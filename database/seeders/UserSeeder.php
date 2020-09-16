@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
                 'email' => 'jameslabrie@yopmail.com',
                 'email_verified_at' => now(),
                 'role' => 'Standard',
-                'password' => Hash::make('thequickbrownfoxjumpsoverthelazydog'),
+                'password' => Hash::make('standardpassword'),
                 'remember_token' => Str::random(10),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
